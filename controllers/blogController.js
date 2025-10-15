@@ -15,16 +15,7 @@ const storage = multer.diskStorage({
 });
 export const upload = multer({ storage });
 
-const getUploadedImageUrl = (req) => {
-    if (req.file) {
-        return `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
-    }
-    return '';
-};
-
 export const createBlog = async (req, res) => {
-    console.log("req.body:", req.body);
-    console.log("req.file:", req.file);
 
     const { blog_title, blog_description, blog_status } = req.body;
 
@@ -100,8 +91,6 @@ export const deleteBlog = async (req, res) => {
             const imageUrl = blog.blog_image;
             const imageName = imageUrl.substring(imageUrl.lastIndexOf('/') + 1);
             const imagePath = path.resolve('uploads', imageName);
-
-            console.log("Trying to delete image:", imagePath);
 
             if (fs.existsSync(imagePath)) {
                 fs.unlinkSync(imagePath);
