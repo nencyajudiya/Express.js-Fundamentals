@@ -1,5 +1,4 @@
 import Blog from '../models/Blog.js';
-import { validationResult } from 'express-validator';
 import path from 'path';
 import fs from 'fs';
 import multer from 'multer';
